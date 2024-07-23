@@ -11,10 +11,10 @@ class StorageCsv(IStorage):
             with open(self.file_path, 'r', newline='') as file:
                 reader = csv.DictReader(file)
                 # Print header
-                print("CSV Headers:", reader.fieldnames)
+                #print("CSV Headers:", reader.fieldnames)
                 for row in reader:
                     # Print row to check if 'poster' exists
-                    print("CSV Row:", row)
+                    #print("CSV Row:", row)
                     title = row.get('title')
                     if title:  # Check if title is not None
                         data[title] = {

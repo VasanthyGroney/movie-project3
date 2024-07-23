@@ -3,7 +3,6 @@ from movie_app import MovieApp
 from storage_json import StorageJson
 from storage_csv import StorageCsv
 
-
 def main():
     init(autoreset=True)
 
@@ -29,29 +28,44 @@ def main():
         print(Fore.CYAN + "2. Add movie")
         print(Fore.CYAN + "3. Delete movie")
         print(Fore.CYAN + "4. Update movie")
-        print(Fore.CYAN + "5. Exit")
+        print(Fore.CYAN + "5. Random movie")
+        print(Fore.CYAN + "6. Stats")
+        print(Fore.CYAN + "7. Search movie")
+        print(Fore.CYAN + "0. Exit")
 
-        choice = input(Fore.YELLOW + "Enter choice (1-5): ")
+        choice = input(Fore.YELLOW + "Enter choice (0-7): ")
 
         if choice == '1':
             app.list_movies()
         elif choice == '2':
             title = input("Enter movie title: ")
-            year = int(input("Enter release year: "))
-            rating = float(input("Enter rating: "))
-            app.add_movie(title, year, rating)
+            try:
+                year = int(input("Enter release year: "))
+                rating = float(input("Enter rating: "))
+                app.add_movie(title, year, rating)
+            except ValueError:
+                print(Fore.RED + "Invalid input. Year must be an integer and rating a float.")
         elif choice == '3':
             title = input("Enter movie title to delete: ")
             app.delete_movie(title)
         elif choice == '4':
             title = input("Enter movie title to update: ")
-            rating = float(input("Enter new rating: "))
-            app.update_movie(title, rating)
+            try:
+                rating = float(input("Enter new rating: "))
+                app.update_movie(title, rating)
+            except ValueError:
+                print(Fore.RED + "Invalid input. Rating must be a float.")
         elif choice == '5':
-            break
+            app.random_movie()
+        elif choice == '6':
+            app.stats()
+        elif choice == '7':
+            title = input("Enter movie title to search: ")
+            app.search_movie(title)
+        elif choice == '0':
+            exit()
         else:
             print(Fore.RED + "Invalid choice. Please try again.")
-
 
 if __name__ == "__main__":
     main()

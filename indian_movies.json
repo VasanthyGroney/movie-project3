@@ -38,5 +38,9 @@
     "Sholay": {
         "year": 1975,
         "rating": 7.0
+    },
+    "heat": {
+        "year": 2009,
+        "rating": 6.0
     }
 }

@@ -1,3 +1,6 @@
+import random
+
+
 class MovieApp:
     def __init__(self, storage_instance):
         """Initialize with a storage instance."""
@@ -39,3 +42,17 @@ class MovieApp:
             print(f"Rating for movie '{title}' updated successfully.")
         else:
             print(f"Movie '{title}' not found.")
+
+    def random_movie(self):
+        """
+        Select and display a random movie from the database.
+        """
+        movies = self.storage.read_data()
+
+        if movies:
+            title,movie = random.choice(list(movies.items()))
+            print(f"Random movie: {title}- Rating: {movie['rating']}, Year: {movie['year']}")
+        else:
+            print("No movies found.")
+
+
