@@ -1,6 +1,8 @@
+from istorage import IStorage
 import json
 
-class StorageJson:
+
+class StorageJson(IStorage):
     def __init__(self, file_path):
         self.file_path = file_path
 
@@ -39,3 +41,11 @@ class StorageJson:
         data = self.read_data()
         data[title]["rating"] = rating
         self.write_data(data)
+
+if __name__ == "__main__":
+    storage = StorageJson('indian_movies.json')
+    #print(storage.list_movies())
+    #storage.add_movie('Abc',2007, 5, 'image.png')
+    #storage.delete_movie('Abc')
+
+

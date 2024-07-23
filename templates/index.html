@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Movies</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Year</th>
+            <th>Rating</th>
+            <th>Poster</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for title, details in movies.items() %}
+        <tr>
+            <td>{{ title }}</td>
+            <td>{{ details.year }}</td>
+            <td>{{ details.rating }}</td>
+            <td><img src="{{ details.poster }}" alt="{{ title }} poster" width="50"></td>
+            <td>
+                <a href="{{ url_for('update_movie', title=title) }}">Update</a>
+                <a href="{{ url_for('delete_movie', title=title) }}">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
