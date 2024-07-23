@@ -189,73 +189,7 @@ def create_rating_histogram():
     print(f"Rating histogram saved to {file_name}")
 
 
-def main():
-    """
-    Main function to run the movie database program.
-    """
-    while True:
-        print("\n********** My Movies Database **********\n")
-        print("1. List movies")
-        print("2. Add movie")
-        print("3. Delete movie")
-        print("4. Update movie")
-        print("5. Stats")
-        print("6. Random movie")
-        print("7. Search movie")
-        print("8. Movies sorted by rating")
-        print("9. Create Rating Histogram")
-        print("0. Exit")
-
-        choice = input("Enter choice (1-9)(or 0 to Exit): ")
-
-        if choice == "1":
-            list_movies()
-        elif choice == "2":
-            title = input("Enter new movie name: ")
-            year = input("Enter the release year for the movie: ")
-            while True:
-                rating_str = input("Enter rating for the movie (0-10): ")
-                try:
-                    rating = float(rating_str.replace(',', '.'))  # Replace comma with dot
-                    if 0 <= rating <= 10:
-                        break
-                    else:
-                        print("Please enter a rating between 0 and 10.")
-                except ValueError:
-                    print("Invalid rating. Please enter a numerical value.")
-            add_movie(title, year, rating)
-        elif choice == "3":
-            title = input("Enter the movie name you want to delete: ")
-            delete_movie(title)
-        elif choice == "4":
-            title = input("Enter the movie name you want to update: ")
-            while True:
-                rating_str = input("Enter the new rating for the movie (0-10): ")
-                try:
-                    rating = float(rating_str.replace(',', '.'))  # Replace comma with dot
-                    if 0 <= rating <= 10:
-                        break
-                    else:
-                        print("Please enter a rating between 0 and 10.")
-                except ValueError:
-                    print("Invalid rating. Please enter a numerical value.")
-            update_movie(title, rating)
-        elif choice == "5":
-            movie_stats()
-        elif choice == "6":
-            random_movie()
-        elif choice == "7":
-            search_movie()
-        elif choice == "8":
-            movies_sorted_by_rating()
-        elif choice == "9":
-            create_rating_histogram()
-        elif choice == "0":
-            print("Exiting...Bye")
-            break
-        else:
-            print("Invalid choice. Please enter a number between 1 and 9. (or 0 to Exit): ")
 
 
-if __name__ == "__main__":
-    main()
+
+

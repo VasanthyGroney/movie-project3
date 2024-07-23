@@ -1,5 +1,5 @@
 import random
-
+import matplotlib.pyplot as plt
 
 class MovieApp:
     def __init__(self, storage_instance):
@@ -85,10 +85,31 @@ class MovieApp:
 
     def run(self):
         """Run the main loop of the application."""
-        from colorama import Fore, init
-        init(autoreset=True)
+        print("Movie app running...")
 
+    def search_movie(self):
+        """
+        Search for a movie by name.
+        """
+        movies = self.storage.read_data()
+        search_term = input("Enter the name of the movie to search: ")
+        found = False
+        for title, info in movies.items():
+            if search_term.lower() in title.lower():
+                print(f"{title}: Rating: {info['rating']}, Year: {info['year']}")
+                found = True
+        if not found:
+            print("Movie not found.")
 
-
-
-
+    def create_rating_histogram(self):
+        """
+        Create and save a histogram of movie ratings.
+        """
+        movies = self.storage.read_data()
+        ratings = [info['rating'] for info in movies.values()]
+        plt.hist(ratings, edgecolor='black')
+        plt.xlabel('Rating')
+        plt.ylabel('Frequency')
+        file_name = input("Enter filename to save the histogram (e.g., histogram.png): ")
+        plt.savefig(file_name)
+        print(f"Rating histogram saved to {file_name}")
