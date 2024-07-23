@@ -31,9 +31,11 @@ def main():
         print(Fore.CYAN + "5. Random movie")
         print(Fore.CYAN + "6. Stats")
         print(Fore.CYAN + "7. Search movie")
+        print(Fore.CYAN + "8. Generate_website")
+        print(Fore.CYAN + "9. run")
         print(Fore.CYAN + "0. Exit")
 
-        choice = input(Fore.YELLOW + "Enter choice (0-7): ")
+        choice = input(Fore.YELLOW + "Enter choice (0-9): ")
 
         if choice == '1':
             app.list_movies()
@@ -62,6 +64,8 @@ def main():
         elif choice == '7':
             title = input("Enter movie title to search: ")
             app.search_movie(title)
+        elif choice == '8':
+            app._generate_website()
         elif choice == '0':
             exit()
         else:

@@ -18,10 +18,15 @@ class MovieApp:
 
     def add_movie(self, title, year, rating):
         """Add a new movie to the storage."""
-        movies = self.storage.read_data()
-        movies[title] = {'year': year, 'rating': rating}
-        self.storage.write_data(movies)
-        print(f"Movie '{title}' added successfully.")
+        try:
+            year = int(year)
+            rating = float(rating)
+            movies = self.storage.read_data()
+            movies[title] = {'year': year, 'rating': rating}
+            self.storage.write_data(movies)
+            print(f"Movie '{title}' added successfully.")
+        except ValueError:
+            print("Invalid input. Year must be an integer and rating a float.")
 
     def delete_movie(self, title):
         """Delete a movie from the storage."""
@@ -35,24 +40,55 @@ class MovieApp:
 
     def update_movie(self, title, rating):
         """Update the rating of an existing movie."""
-        movies = self.storage.read_data()
-        if title in movies:
-            movies[title]['rating'] = rating
-            self.storage.write_data(movies)
-            print(f"Rating for movie '{title}' updated successfully.")
-        else:
-            print(f"Movie '{title}' not found.")
+        try:
+            rating = float(rating)
+            movies = self.storage.read_data()
+            if title in movies:
+                movies[title]['rating'] = rating
+                self.storage.write_data(movies)
+                print(f"Rating for movie '{title}' updated successfully.")
+            else:
+                print(f"Movie '{title}' not found.")
+        except ValueError:
+            print("Invalid input. Rating must be a float.")
 
     def random_movie(self):
-        """
-        Select and display a random movie from the database.
-        """
+        """Select and display a random movie from the database."""
         movies = self.storage.read_data()
-
         if movies:
-            title,movie = random.choice(list(movies.items()))
-            print(f"Random movie: {title}- Rating: {movie['rating']}, Year: {movie['year']}")
+            title, movie = random.choice(list(movies.items()))
+            print(f"Random movie: {title} - Rating: {movie['rating']}, Year: {movie['year']}")
         else:
             print("No movies found.")
+
+    def stats(self):
+        """Display statistics of the movie collection."""
+        movies = self.storage.read_data()
+        if not movies:
+            print("No movies in database.")
+            return
+
+        total_movies = len(movies)
+        total_ratings = sum(movie['rating'] for movie in movies.values())
+        average_rating = total_ratings / total_movies
+        highest_rated = max(movies.items(), key=lambda x: x[1]['rating'])
+        lowest_rated = min(movies.items(), key=lambda x: x[1]['rating'])
+
+        print(f"Total movies: {total_movies}")
+        print(f"Average rating: {average_rating:.2f}")
+        print(f"Highest rated movie: {highest_rated[0]} with rating {highest_rated[1]['rating']}")
+        print(f"Lowest rated movie: {lowest_rated[0]} with rating {lowest_rated[1]['rating']}")
+
+    def _generate_website(self):
+        """Generate a website (dummy method for this context)."""
+        print("Website generation is not implemented yet.")
+
+    def run(self):
+        """Run the main loop of the application."""
+        from colorama import Fore, init
+        init(autoreset=True)
+
+
+
 
 
