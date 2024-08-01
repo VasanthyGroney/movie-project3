@@ -69,7 +69,7 @@ class MovieApp:
             return
 
         total_movies = len(movies)
-        total_ratings = sum(movie['rating'] for movie in movies.values())
+        total_ratings = sum(float(movie['rating']) for movie in movies.values())
         average_rating = total_ratings / total_movies
         highest_rated = max(movies.items(), key=lambda x: x[1]['rating'])
         lowest_rated = min(movies.items(), key=lambda x: x[1]['rating'])
